@@ -1,17 +1,15 @@
 //digital neagtive
 clc;
 clear all;
-i=imread("C:\Users\akash\OneDrive\Desktop\IPMV\Project\image.jpg");
+i=imread("C:\Users\shubh\Downloads\img.png");
 ig=rgb2gray(i);
 subplot(1,2,1);
 imshow(ig);
 title("original image");
 [r,c]=size(ig);
-j=ig;
 for x=1:1:r;
  for y=1:1:c;
- t=ig(x,y);
- j(x,y)=255-t;
+ j(x,y)=255-ig(x,y); //
  end
 end
 subplot(1,2,2);
@@ -21,36 +19,39 @@ title("negative image");
 //Contrast Stretching
 clc;
 clear all;
-i=imread("C:\Users\Aakash\Desktop\sem6\ipmv\ex1\cameraman.png");
+i=imread("C:\Users\shubh\Downloads\img.png");
 ig=rgb2gray(i);
 subplot(1,2,1);
 imshow(ig);
 title("original image");
+
 [r,c]=size(ig);
 j=ig;
-a=100;
-b=170;
-v=50;
-w=200;
+r1=100;
+r2=170;
+s1=50;
+s2=200;
 l=256;
-p=v/a;
-m=(w-v)/(b-a);
-n=((l-1)-w)/((l-1)-b);
+m1=s1/r1;
+m2=(s2-s1)/(r2-r1);
+m3=((l-1)-s2)/((l-1)-r2);
 for x=1:1:r
  for y=1:1:c
  r=ig(x,y)
-if(r<a)
- j(x,y)= p*r;
  
-elseif(r>=a) && (r<=b)
- j(x,y)= m*(r-a)+v;
+if(r<r1)
+ j(x,y)= m1*r;
+ 
+elseif(r>=r1) && (r<=r2)
+ j(x,y)= m2*(r-r1)+s1;
  
 else
- j(x,y)= m*(r-b)+w;
+ j(x,y)= m3*(r-r2)+s2;
  end
  end
 end
 subplot(1,2,2);
+title("contrast streach");
 imshow(j);
 
 //Logarithmic Transformation
